@@ -1,0 +1,58 @@
+<Window x:Class="WpfApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+    xmlns:local="clr-namespace:WpfApp" mc:Ignorable="d" Name="this"
+    Title="WPF + QML Embedded Window" Width="640" Height="480" MinWidth="640" MinHeight="480">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="50*" />
+      <ColumnDefinition Width="100*" />
+    </Grid.ColumnDefinitions>
+    <StackPanel Name="StackPanel" Grid.Column="0" Orientation="Vertical" Background="#FFF0F0F0">
+      <Label Content="WPF" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left"
+          VerticalAlignment="Top" Height="37" Margin="10,0,10,0" />
+      <Label Content="Camera Position X" Margin="10,0,10,0" />
+      <Slider Name="SliderCameraPositionX" Minimum="-500" Maximum="500" SmallChange="1"
+          ValueChanged="Slider_ValueChanged" MouseDoubleClick="Slider_MouseDoubleClick"
+          Margin="10,0,10,0" />
+      <Label Content="Camera Position Y" Margin="10,0,10,0" />
+      <Slider Name="SliderCameraPositionY" Minimum="-500" Maximum="500" SmallChange="1"
+          ValueChanged="Slider_ValueChanged" MouseDoubleClick="Slider_MouseDoubleClick"
+          Margin="10,0,10,0" />
+      <Label Content="Camera Position Z" Margin="10,0,10,0" />
+      <Slider Name="SliderCameraPositionZ" Minimum="-500" Maximum="500" SmallChange="1"
+          IsDirectionReversed="True" ValueChanged="Slider_ValueChanged"
+          MouseDoubleClick="Slider_MouseDoubleClick" Margin="10,0,10,0" />
+      <Label Content="Camera Rotation X" Margin="10,0,10,0" />
+      <Slider Name="SliderCameraRotationX" Minimum="-180" Maximum="180" SmallChange="1"
+          ValueChanged="Slider_ValueChanged" MouseDoubleClick="Slider_MouseDoubleClick"
+          Margin="10,0,10,0" />
+      <Label Content="Camera Rotation Y" Margin="10,0,10,0" />
+      <Slider Name="SliderCameraRotationY" Minimum="-180" Maximum="180" SmallChange="1"
+          ValueChanged="Slider_ValueChanged" MouseDoubleClick="Slider_MouseDoubleClick"
+          Margin="10,0,10,0" />
+      <Label Content="Camera Rotation Z" Margin="10,0,10,0" />
+      <Slider Name="SliderCameraRotationZ" Minimum="-180" Maximum="180" SmallChange="1"
+          ValueChanged="Slider_ValueChanged" MouseDoubleClick="Slider_MouseDoubleClick"
+          Margin="10,0,10,0" />
+      <Label Content="Animation Speed" Margin="10,0,10,0" />
+      <Slider Name="SliderAnimationDuration" Minimum="0" Value="0.1" Maximum="1" SmallChange="0.001"
+          TickPlacement="BottomRight" TickFrequency="0.05" ValueChanged="Slider_ValueChanged"
+          MouseDoubleClick="Slider_MouseDoubleClick" Margin="10,0,10,0" />
+      <Label Content="{Binding Rpm, ElementName=this}" ContentStringFormat="{}{0:F0} rpm"
+          HorizontalContentAlignment="Center" Margin="10,-5,10,0" />
+      <Label Content="Frame Rate" Margin="10,0,10,0" />
+      <Grid Margin="10,0,10,0">
+        <ProgressBar Name="FpsValue" Value="0" Maximum="60" Margin="10,0,10,0" />
+        <TextBlock Name="FpsLabel" HorizontalAlignment="Center" VerticalAlignment="Center"
+            Text="--.- fps" />
+      </Grid>
+    </StackPanel>
+    <WindowsFormsHost Name="EmbeddedAppHost" Grid.Column="1">
+      <wf:Panel Name="EmbeddedAppPanel" BackColor="#AAAAAA" />
+    </WindowsFormsHost>
+  </Grid>
+</Window>

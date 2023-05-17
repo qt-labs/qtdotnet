@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "WpfApp": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "PATH": "C:/lib/Qt/6.2.4/msvc2019_64/bin;%PATH%"
+      },
+      "nativeDebugging": false
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file alias="watchface.png">content/watchface.png</file>
+        <file alias="chrono_1_hand.png">content/chrono_1_hand.png</file>
+        <file alias="chrono_2_hand.png">content/chrono_2_hand.png</file>
+        <file alias="chrono_3_needle.png">content/chrono_3_needle.png</file>
+        <file alias="hour_hand.png">content/hour_hand.png</file>
+        <file alias="minute_hand.png">content/minute_hand.png</file>
+        <file alias="second_hand.png">content/second_hand.png</file>
+        <file alias="center.png">content/center.png</file>
+        <file alias="chrono_1_center.png">content/chrono_1_center.png</file>
+        <file alias="chrono_2_center.png">content/chrono_2_center.png</file>
+        <file alias="chrono_3_center.png">content/chrono_3_center.png</file>
+        <file>QChronometer/AdjustmentWheel.qml</file>
+        <file>QChronometer/InsetDial.qml</file>
+        <file>QChronometer/WatchButton.qml</file>
+    </qresource>
+</RCC>
