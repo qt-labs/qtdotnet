@@ -42,6 +42,17 @@ public:
         return QDotNetInbound<T>::convert(funcPtr(QDotNetOutbound<TArg>::convert(arg)...));
     }
 
+    typename QDotNetInbound<T>::TargetType invoke(const QDotNetRef &obj,
+        typename QDotNetOutbound<TArg>::SourceType... arg) const
+    {
+        return operator()(arg...);
+    }
+    typename QDotNetInbound<T>::TargetType invoke(nullptr_t nullObj,
+        typename QDotNetOutbound<TArg>::SourceType... arg) const
+    {
+        return operator()(arg...);
+    }
+
 private:
     using Delegate = typename QDotNetInbound<T>::InboundType(QDOTNETFUNCTION_CALLTYPE *)(
         typename QDotNetOutbound<TArg>::OutboundType...);
@@ -63,6 +74,15 @@ public:
     {
         if (isValid())
             funcPtr(QDotNetOutbound<TArg>::convert(arg)...);
+    }
+
+    void invoke(const QDotNetRef &obj, typename QDotNetOutbound<TArg>::SourceType... arg) const
+    {
+        operator()(arg...);
+    }
+    void invoke(nullptr_t nullObj, typename QDotNetOutbound<TArg>::SourceType... arg) const
+    {
+        operator()(arg...);
     }
 
 private:

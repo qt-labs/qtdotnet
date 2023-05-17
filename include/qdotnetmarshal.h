@@ -241,3 +241,68 @@ struct QDotNetOutbound<QList<T>, void>
         return srvValue.constData();
     }
 };
+
+template<>
+struct QDotNetTypeOf<QDotNetRef>
+{
+    static inline const QString TypeName = QStringLiteral("System.Object");
+    static inline UnmanagedType MarshalAs = UnmanagedType::ObjectRef;
+};
+
+template<>
+struct QDotNetTypeOf<QDotNetType>
+{
+    static inline const QString TypeName = QStringLiteral("System.Type");
+    static inline UnmanagedType MarshalAs = UnmanagedType::ObjectRef;
+};
+
+template<>
+struct QDotNetTypeOf<QDotNetException>
+{
+    static inline const QString TypeName = QStringLiteral("System.Exception");
+    static inline UnmanagedType MarshalAs = UnmanagedType::ObjectRef;
+};
+
+template<typename T>
+struct QDotNetOutbound<T, std::enable_if_t<std::is_base_of_v<QDotNetRef, T>>>
+{
+    using SourceType = const T&;
+    using OutboundType = const void*;
+    static inline const QDotNetParameter Parameter =
+        QDotNetParameter(QDotNetTypeOf<T>::TypeName, QDotNetTypeOf<T>::MarshalAs);
+    static OutboundType convert(SourceType dotNetObj)
+    {
+        return dotNetObj.gcHandle();
+    }
+};
+
+template<typename T>
+struct QDotNetInbound<T, std::enable_if_t<std::is_base_of_v<QDotNetRef, T>>>
+{
+    using InboundType = const void*;
+    using TargetType = T;
+    static inline const QDotNetParameter Parameter =
+        QDotNetParameter(QDotNetTypeOf<T>::TypeName, QDotNetTypeOf<T>::MarshalAs);
+    static TargetType convert(InboundType gcHandle)
+    {
+        return T(gcHandle);
+    }
+};
+
+template<typename T>
+struct QDotNetNull<T, std::enable_if_t<std::is_base_of_v<QDotNetRef, T>>>
+{
+    static T value() { return T(nullptr); }
+    static bool isNull(const T &obj) { return !obj.isValid(); }
+};
+
+namespace QtDotNet
+{
+    using Null = QDotNetNull<QDotNetRef>;
+
+    template<typename T>
+    bool isNull(const T &obj) { return QDotNetNull<T>::isNull(obj); }
+
+    template<typename T>
+    T null() { return QDotNetNull<T>::value(); }
+}
