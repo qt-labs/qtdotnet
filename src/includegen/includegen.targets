@@ -1,0 +1,47 @@
+<!--
+/***************************************************************************************************
+ Copyright (C) 2023 The Qt Company Ltd.
+ SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+***************************************************************************************************/
+-->
+<Project>
+  <Target Name="Clean">
+    <ItemGroup>
+      <GeneratedHeaders Include="..\..\include\*" />
+      <GeneratedHeaders Remove="..\..\include\*.h" />
+    </ItemGroup>
+    <Delete Files="@(GeneratedHeaders)" />
+  </Target>
+  <Target Name="Build">
+    <PropertyGroup>
+      <ClassRegex>class QDotNet\w+\b(?!;)</ClassRegex>
+    </PropertyGroup>
+    <ItemGroup>
+      <Header Include="..\..\include\*.h" />
+      <Header>
+        <Text>$([System.IO.File]::ReadAllText('%(Identity)'))</Text>
+      </Header>
+      <Header>
+        <Classes
+          >$([System.Text.RegularExpressions.Regex]::Matches('%(Text)','$(ClassRegex)'))</Classes>
+      </Header>
+      <Class Include="%(Header.Classes)">
+        <Header>$([System.IO.Path]::GetFileName('%(Header.Identity)'))</Header>
+      </Class>
+      <Class>
+        <Name>$([System.String]::Copy('%(Identity)').Substring(6))</Name>
+      </Class>
+      <Class>
+        <Include>#include &lt;%(Header)&gt;</Include>
+        <Current
+          Condition="Exists('%(..\..\..\..\include\%(Name)')"
+          >$([System.IO.File]::ReadAllText('%(..\..\..\..\include\%(Name)').Replace('
+',''))</Current>
+      </Class>
+    </ItemGroup>
+    <WriteLinesToFile
+      Condition="'%(Class.Include)' != '%(Class.Current)'"
+      File="..\..\include\%(Class.Name)" Lines="#include &lt;%(Class.Header)&gt;"/>
+  </Target>
+  <Target Name="Rebuild" DependsOnTargets="Clean;Build"/>
+</Project>
