@@ -1,0 +1,20 @@
+<!--
+/***************************************************************************************************
+ Copyright (C) 2023 The Qt Company Ltd.
+ SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+***************************************************************************************************/
+-->
+
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Configurations>Debug;Release;Tests</Configurations>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Qt.DotNet.Adapter\Qt.DotNet.Adapter.csproj" />
+    <ProjectReference Include="..\FooLib\FooLib.csproj" />
+  </ItemGroup>
+</Project>

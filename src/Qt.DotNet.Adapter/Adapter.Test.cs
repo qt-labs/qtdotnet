@@ -31,12 +31,7 @@ namespace Qt.DotNet
         /// <returns></returns>
         public static bool Test()
         {
-            // TO-DO: revise this
-
-            LoadAssembly("FooLib.dll");
-
             var ctorPtr = ResolveConstructor(1, new[] { new Parameter("FooLib.Foo, FooLib") });
-            var ctorPtr2 = ResolveConstructor(1, new[] { new Parameter("FooLib.Foo, FooLib") });
 
             var ctor = GetMethod(ctorPtr) as ConstructorInfo;
             Debug.Assert(ctor != null, nameof(ctor) + " is null");
