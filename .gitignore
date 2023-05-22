@@ -1,0 +1,15 @@
+# Visual Studio cache/options directory
+.vs/
+
+# User-specific files
+*.user
+
+# Build results
+debug/
+release/
+bin/
+obj/
+
+# Generated Headers
+include/*
+!include/*.h
