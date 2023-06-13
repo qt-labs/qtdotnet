@@ -74,26 +74,24 @@ public:
         }
 
 #define QDOTNETADAPTER_DELEGATE(d) \
-    instance().d, assemblyPath, typeFullName, \
-    QString(#d).sliced(2), \
-    delegateName.arg(QString(#d).sliced(2))
+    instance().fn##d, assemblyPath, typeFullName, #d, delegateName.arg(#d)
 
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnLoadAssembly));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnResolveStaticMethod));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnResolveConstructor));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnResolveInstanceMethod));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnResolveSafeMethod));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnAddEventHandler));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnRemoveEventHandler));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnRemoveAllEventHandlers));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnAddObjectRef));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnFreeDelegateRef));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnFreeObjectRef));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnFreeTypeRef));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnAddInterfaceProxy));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnSetInterfaceMethod));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnStats));
-        host->resolveFunction(QDOTNETADAPTER_DELEGATE(fnGetObject));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(LoadAssembly));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(ResolveStaticMethod));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(ResolveConstructor));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(ResolveInstanceMethod));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(ResolveSafeMethod));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(AddEventHandler));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(RemoveEventHandler));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(RemoveAllEventHandlers));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(AddObjectRef));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(FreeDelegateRef));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(FreeObjectRef));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(FreeTypeRef));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(AddInterfaceProxy));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(SetInterfaceMethod));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(Stats));
+        host->resolveFunction(QDOTNETADAPTER_DELEGATE(GetObject));
 
 #undef QDOTNETADAPTER_DELEGATE
 
